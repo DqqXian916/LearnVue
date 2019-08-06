@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>组件</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <program-item v-for="item in programs" v-bind:game="item"></program-item>
+        </ul>
+    </div>
+    <script>
+        Vue.component('game-item',{
+            props:['game']
+        })
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                
+            },
+            methods:{
+               
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>处理用户输入</title>
+</head>
+<body>
+    <div id="app">
+        <p>你最喜欢的编程语言是:{{programName}}</p>
+        <button v-on:click="btnClick('c')">c</button>
+        <button v-on:click="btnClick('c++')">c++</button>
+        <button v-on:click="btnClick('java')">java</button>
+        <button @click="btnClick('javascript')">javascript</button>
+    </div>
+    <script>
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                programName:'javascript'
+            },
+            methods:{
+                btnClick:function(pname){
+                    this.programName = pname;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

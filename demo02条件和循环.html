@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h3>列表</h3>
+        <!-- 虚拟Dom，为假时不会出现在Dom树中 -->
+        <div v-show="flag">dsfgsdfsa</div>
+        <ol>
+            <li v-for="game in games">{{game.title}}/{{game.price}}元</li>
+        </ol>
+    </div>
+    <script>
+        var myApp = new Vue({
+            el:"#app",
+            data:{
+                flag:false,
+                games:[
+                    {title:"rsea",price:321},
+                    {title:"rewf",price:023},
+                    {title:"fsd",price:340}
+                ],
+            }
+        })
+    </script>
+</body>
+</html>

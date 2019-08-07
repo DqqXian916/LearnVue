@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>计算属性</title>
+</head>
+
+<body>
+    <div id="app">
+        打开浏览器的时间是:{{iNow}}<br>
+        一天后的时间是:{{nowDayTime}}<br>
+        距离8月6号23点还有:{{countDown}}
+    </div>
+    <script>
+        var iNow = new Date();
+        var myApp = new Vue({
+            el: "#app",
+            data: {
+                nowTime: iNow,
+            },
+            methods: {
+                convertTime(n) {
+                    var iH = Math.floor(n % 86400 / 3600);
+                    var iM = Math.floor(n % 3600 / 60);
+                    var iS = n % 60;
+                    return iH + ":" + iM + ":" + iS;
+                },
+            },
+            computed: {
+                nowDayTime: function () {
+                    return iNow.getHours()+":"+iNow.getMinutes()+":"+iNow.getSeconds();
+                },
+                countDown: function () {
+                    var newTime = new Date(2019, 9, 6, 23, 0, 0);
+                    var nowTime = new Date();
+                    var duration = Math.floor((newTime - iNow) / 1000);
+                    var iH =  Math.floor(duration % 86400 / 3600);
+                    var iM = Math.floor(duration % 3600 / 60);
+                    var iSec = (duration % 60);
+                    var convertTime = iH+":"+ iM +":" + iSec;
+                    return convertTime;
+                },
+            },
+
+        })
+    </script>
+</body>
+
+</html>

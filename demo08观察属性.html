@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>观察属性</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>衬衫的价格为:{{price}}美元，含税价格为:{{priceTax}}元,折合人民币为:{{priceRMB}}元</p>
+        <button @click="btnClick(100)">加价100元</button>
+    </div>
+    <script>
+        var myApp = new Vue({
+            el: "#app",
+            data: {
+                price: 0,
+                priceTax:0,
+                priceRMB:0
+            },
+            watch:{
+                price:function(newVal,oldVal){
+                    console.log(newVal,oldVal);
+                    this.priceTax = Math.round(this.price * 1.5);
+                    this.priceRMB = Math.round(this.priceTax * 8.9);
+                }
+            },
+            methods:{
+                btnClick : function(newPrice){
+                    this.price += newPrice;
+                }
+            }
+        })
+        myApp.price=320;
+    </script>
+</body>
+
+</html>

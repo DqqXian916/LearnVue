@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>计算属性</title>
+</head>
+<body>
+    <div id="app">
+        衬衫的价格为:{{price}}美元，含税价格为:{{priceInTax}}元,折合人民币为:{{priceRMB}}元  
+        <button @click="btnClick(320)"> 把含税价格改为320元</button>
+    </div>
+    <script>
+       var myApp = new Vue({
+           el:"#app",
+           data:{
+               price:362
+           },
+           computed:{
+                priceInTax:{
+                   get:function(value){
+                       return parseInt(this.price * 1.5);
+                   },
+                   set:function(value){
+                       this.price = parseInt(value / 1.5);
+                   }
+                },
+                priceRMB:function(){
+                    return Math.round(this.priceInTax * 8.9);
+                },
+           },
+           methods:{
+               btnClick:function(newPrice){
+                   this.priceInTax = newPrice;
+               }
+           }
+       })
+    </script>
+</body>
+</html>

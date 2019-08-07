@@ -10,21 +10,24 @@
 <body>
     <div id="app">
         <ul>
-            <program-item v-for="item in programs" v-bind:game="item"></program-item>
+            <game-item v-for="item in games" v-bind:game="item"></game-item>
         </ul>
     </div>
     <script>
         Vue.component('game-item',{
-            props:['game']
+            props:['game'],
+            template:`<li>{{game.title}}</li>`
         })
         let vm = new Vue({
             el:"#app",
             data:{
-                
+                games:[
+                    {title:'c'},
+                    {title:'c++'},
+                    {title:'java'},
+                    {title:'javascript'}
+                ]
             },
-            methods:{
-               
-            }
         })
     </script>
 </body>

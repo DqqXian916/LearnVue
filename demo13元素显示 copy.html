@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <title>条件渲染</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+<body>
+<div id="myApp">
+   <button @click="btnClick">祝君好运!</button>
+   <h1 @click="btnClick">您的初试成绩为:<span v-show="result">{{score}}</span></h1>
+</div>
+<script>
+    var myApp = new Vue({
+        el: '#myApp',
+        data: {
+            score:369,
+            result : false
+        },
+        methods: {
+            btnClick: function(){
+                this.result = !this.result;
+            },
+        },
+    });
+    // 动态显示是否显示某些元素
+</script>
+</body>
+
+</html>

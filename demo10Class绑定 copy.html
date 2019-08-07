@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>绑定类</title>
+    <style>
+    body{
+        font-size:25px;
+    }
+    .active{
+        color:red;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div v-bind:class="{active:isActive}">红色1</div>
+        <div :class="{active:isActive}">红色2</div>
+        <button @click="btnClick">改变css</button>
+    </div>
+    <script>
+       var myApp = new Vue({
+           el:"#app",
+           data:{
+               isActive:true
+           },
+           methods:{
+               btnClick:function(){
+                   this.isActive = false;
+               }
+           }
+       })
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件传递数据</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>以下是对应商品的商品卡片</h1>
+        <goods-card :id="2"></goods-card>
+        <!-- <goods-card :id="2"></goods-card>
+        <goods-card :id="3"></goods-card>
+        <goods-card :id="4"></goods-card> -->
+    </div>
+    </div>
+    <script>
+        Vue.component('goods-card', {
+            props:['id'],
+            template: `<div>商品{{id}}:{{showCard}}</div>`,
+            computed: {
+                showCard: function () {
+                    var goodsDescribe = [];
+                        if (this.id == 1) {
+                            goodsDescribe = [{
+                                id: this.id,
+                                img: "homeSecKillGood1.jpg",
+                                describe: "NB ML373MTA 白",
+                                nowPrice: "369",
+                                beforePrice: "496",
+                                rest: "15"
+                            }];
+                        }
+                        else if(this.id == 2){
+                            goodsDescribe = [{
+                                id: this.id,
+                                img: "homeSecKillGood2.jpg",
+                                describe: "NIKE ML373MTsds 黑",
+                                nowPrice: "45",
+                                beforePrice: "53",
+                                rest: "67"
+                            }];
+                        }
+                        else if(this.id == 3){
+                            goodsDescribe = [{
+                                id: this.id,
+                                img: "homeSecKillGood3.jpg",
+                                describe: "Converse sdfUT73MTsds 黑",
+                                nowPrice: "45",
+                                beforePrice: "53",
+                                rest: "67"
+                            }];
+                        }
+                        else if(this.id == 4){
+                            goodsDescribe = [{
+                                id: this.id,
+                                img: "homeSecKillGood4.jpg",
+                                describe: "BELLEE sdfTsds 粉",
+                                nowPrice: "45",
+                                beforePrice: "53",
+                                rest: "67"
+                            }];
+                        }
+                        return goodsDescribe;
+                }
+            }
+        })
+        let vm = new Vue({
+            el: "#app"
+        })
+    </script>
+</body>
+
+</html>

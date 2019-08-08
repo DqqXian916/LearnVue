@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>请输入商品编号:<input v-model="goodsid"></div>
+        <hr>
+        <get-id :pid="goodsid"></get-id>
+    </div>
+    </div>
+    <script>
+        Vue.component('get-id',{
+            props:['pid'],
+            template:`
+                <div>请问，商品的编号是<strong>{{pid}}</strong></div>
+            `
+        });
+        let vm = new Vue({
+            el: "#app",
+            data:{
+                goodsid:'1'
+            }
+        });
+    </script>
+</body>
+
+</html>

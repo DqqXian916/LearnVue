@@ -2,27 +2,27 @@
 <html lang="zh">
 
 <head>
-    <title>列表渲染</title>
+    <title>对象迭代</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
-
 <body>
     <div id="myApp">
-       <ul>
-           <li v-for="(program,index) in programs"> ({{index+1}}) {{program.name}} 描述:{{program.info}}</li>
-       </ul>
+        <div v-for="(value,key) in mygame">
+            ￥{{key}} : ￥{{value}}
+        </div>
     </div>
     <script>
         var myApp = new Vue({
             el: '#myApp',
             data: {
-                programs:[
-                    {name:"C",info:"入门但经典"},
-                    {name:"Java",info:"最为广泛应用的语言"},
-                    {name:"Javascript",info:"前端程序员的必备技能"}
-
-                ]
+                mygame:{
+                    title:"妙真:绘笔千山",
+                    price:290,
+                    pubdate:"2018年夏",
+                    category:"独立游戏",
+                    agerange:"全年龄"
+                }
             }
         });
         // 动态显示是否显示某些元素

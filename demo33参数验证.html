@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>参数验证</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <show-goods-info name="鞋1" :id="1" :detail="{describe:'匡威新款',rest:'5'}"></show-goods-info>
+        <show-goods-info name="鞋2" :id="1"></show-goods-info>
+    </div>
+    </div>
+    <script>
+        Vue.component('show-goods-info',{
+            props:{
+                name:{
+                    type:String,
+                    required:true,
+                },
+                id:{
+                    type:Number,
+                    validator:function(value){
+                        return value >= 0 && value <= 120;
+                    }
+                },
+                detail:{
+                    type:Object,
+                    default:function(){
+                        return{
+                            describe:'新百伦2019新款灰',
+                            rest:'15'
+                        };
+                    }
+                },
+            },
+            template:`
+                <div>
+                    商品名称:{{this.name}}<br/>
+                    商品编号:{{this.id}}<br/>
+                    商品描述:{{this.detail.describe}}<br/>
+                    商品剩余件数:{{this.detail.rest}}
+                </div>
+            `
+        })
+        let vm = new Vue({
+            el:'#app',
+        })
+    </script>
+</body>
+
+</html>

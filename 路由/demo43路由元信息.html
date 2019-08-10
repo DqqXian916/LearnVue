@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/seckill">秒杀</router-link>
+        <router-link to="/paying">待付款</router-link>
+        <router-link to="/login">登录</router-link>
+        <a href="javascript:void(0)">退出</a>
+        <router-view></router-view>
+    </div>
+
+
+    <script>
+
+        Vue.use(VueRouter);
+
+        var Home = {
+            template:`
+                <div>我是首页</div>
+            `
+        }
+       
+        var Seckill = {
+            template:`
+                <div>我是秒杀详情</div>
+            `
+        }
+
+        var Paying = {
+            template:`
+                <div>我是待付款</div>
+            `
+        }
+
+        var Login = {
+            data(){
+                return{
+                    name:'',
+                    pwd:'',
+                }
+            },
+            template:`
+                <div>
+                    <input type="text" v-model='name' /> 
+                    <input type="password" v-model='pwd' />     
+                    <input type="button" value='登录' @click='loginHandler'/>       
+                </div>
+            `,
+            methods:{
+                loginHandler(){
+                    //登录
+                    localStorage.setItem('user',{name:this.name,pwd:this.pwd});
+                    //跳转到待付款页面
+                    //编程式导航
+                    this.$router.push({
+                        name:'paying'
+                    })
+                }
+            }
+        }
+
+        var router = new VueRouter({
+            routes:[
+                {
+                    path:'/',
+                    redirect:'/seckill'
+                },
+                {
+                    path:'/seckill',
+                    component:Seckill
+                },
+                {
+                    name:'login',
+                    path:'/login',
+                    component:Login
+                },
+                {
+                    name:'paying',
+                    path:'/paying',
+                    component:Paying,
+                    //给未来的路由做权限控制
+                    meta:{
+                        //证明用户访问该组件的时候需要登录
+                        auth:true
+                    }
+                },
+            ]
+        });
+
+        router.beforeEach((to,from,next)=>{
+            console.log(to);
+            console.log(from);
+            if(to.meta.auth){
+                if(localStorage.getItem('user')){
+                    //如果localStorage存储不为空，表示用户登录完成，直接放行
+                    next();
+                }else{
+                    //用户需要登录
+                    next({path:'/login'});
+                }
+            }else{
+                //直接放行
+                next();//如果不调用next会卡住页面
+            }
+        })
+
+        // 创建vue实例化对象
+        new Vue({
+            el: "#app",
+            router,
+        })
+    </script>
+</body>
+
+</html>
